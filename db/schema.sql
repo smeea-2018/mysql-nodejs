@@ -1,0 +1,35 @@
+DROP DATABASE IF EXISTS library_db;
+CREATE DATABASE library_db;
+
+USE library_db;
+
+CREATE TABLE users (
+  id INT NOT NULL AUTO_INCREMENT,
+  firstName VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL,
+  emailAddress VARCHAR(255) NOT NULL,
+  dateOfBirth DATE,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE books (
+  id INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  bookType VARCHAR(255) NOT NULL,
+  isbn VARCHAR(255) NOT NULL,
+  genre VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE loaned_books (
+  id INT NOT NULL AUTO_INCREMENT,
+  userId INT NOT NULL,
+  bookId INT NOT NULL,
+  dateOfIssue DATETIME NOT NULL,
+  dueDate DATETIME NOT NULL,
+  dateOfReturn DATETIME,
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (bookId) REFERENCES books(id),
+  PRIMARY KEY (id)
+);
